@@ -3,7 +3,8 @@ import { Routes, Redirect, Route, Link, NavLink, Navigate } from "react-router-d
 import "./App.css";
 import AlbumFeature from "./features/Album";
 import TodoFeature from "./features/Todo";
-import NotFound from "./NotFound";
+import NotFound from "./components/NotFound";
+
 
 function App() {
   return (
