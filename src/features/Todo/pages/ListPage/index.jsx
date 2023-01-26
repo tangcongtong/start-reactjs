@@ -1,7 +1,16 @@
-import { Routes, Redirect, Route, Link, NavLink, Navigate } from "react-router-dom";
+import {
+  Routes,
+  Redirect,
+  Route,
+  Link,
+  NavLink,
+  Navigate,
+  useLocation,
+} from "react-router-dom";
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import TodoList from "../../components/TodoList";
+import queryString from "query-string";
 
 ListPage.propTypes = {};
 
@@ -23,8 +32,12 @@ function ListPage(props) {
       status: "new",
     },
   ];
+  const location = useLocation();
   const [List, setTodoList] = useState(initList);
-  const [filteredStatus, setfilteredStatus] = useState("all");
+  const [filteredStatus, setfilteredStatus] = useState(() => {
+    const params = queryString.parse(location.search);
+    return params.status || "all";
+  });
 
   const handleTodoList = (todo, idx) => {
     console.log(todo, idx);
@@ -46,14 +59,19 @@ function ListPage(props) {
   const handleShowNewClick = () => {
     setfilteredStatus("new");
   };
-  const renderedTodoList = List.filter((x) => filteredStatus === "all"|| filteredStatus===x.status);
-  console.log('====================================');
+  const renderedTodoList = List.filter(
+    (x) => filteredStatus === "all" || filteredStatus === x.status
+  );
+  console.log("====================================");
   console.log(renderedTodoList);
-  console.log('====================================');
+  console.log("====================================");
   return (
     <div>
       <h3>To do list</h3>
-      <TodoList todoList={renderedTodoList} onTodoClick={handleTodoList}></TodoList>
+      <TodoList
+        todoList={renderedTodoList}
+        onTodoClick={handleTodoList}
+      ></TodoList>
 
       <div>
         <button onClick={handleShowAllClick}>Show ALL</button>

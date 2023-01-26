@@ -20,8 +20,7 @@ function TodoFeature(props) {
     <div>
       <Routes>
         <Route exact  path="/*" element={<ListPage />} ></Route>
-        <Route  path="/:id" element={<DetailPage  animate={true}/>}></Route>
-        <Route path="*" element={<NotFound />}></Route>
+        <Route exact  path="/:id" element={<DetailPage/>}></Route>
       </Routes>
     </div>
   );
