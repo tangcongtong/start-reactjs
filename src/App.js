@@ -1,8 +1,9 @@
 import logo from "./logo.svg";
-import { Routes, Route, Link, NavLink } from "react-router-dom";
+import { Routes, Redirect, Route, Link, NavLink, Navigate } from "react-router-dom";
 import "./App.css";
 import AlbumFeature from "./features/Album";
 import TodoFeature from "./features/Todo";
+import NotFound from "./NotFound";
 
 function App() {
   return (
@@ -13,25 +14,30 @@ function App() {
       </header> */}
       <h1>Homepage</h1>
       <h5>Header</h5>
-        <p>
-          <Link to="/todos">Todos</Link>
-        </p>
-        <p>
-          <Link to="/albums">Albums</Link>
-        </p>
-
-        <p>
-          <NavLink to="/todos"   className={({ isActive }) => (isActive ? 'active' : 'inactive')}>
-            Todos
-          </NavLink>
-        </p>
-        <p>
-          <NavLink to="/albums">Albums</NavLink>
-        </p>
+      <p>
+        <Link to="/todos">Todos</Link>
+      </p>
+      <p>
+        <Link to="/albums">Albums</Link>
+      </p>
+      <p>
+        <NavLink
+          to="/todos"
+        
+        >
+          Todos
+        </NavLink>
+      </p>
+      <p>
+        <NavLink to="/albums"   >Albums</NavLink>
+      </p>
+        {/* <Navigate from="/home" to="/" /> */}
       <Routes>
 
-        <Route path="/todos" element={<TodoFeature />}></Route>
+        <Route path="/" element={<TodoFeature />}></Route>
+        <Route  path="/todos/*" element={<TodoFeature />}></Route>
         <Route path="/albums" element={<AlbumFeature />}></Route>
+        <Route path="*" element={<NotFound />}></Route>
       </Routes>
       Footer
     </div>
